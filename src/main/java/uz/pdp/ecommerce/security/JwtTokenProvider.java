@@ -34,7 +34,7 @@ public class JwtTokenProvider {
 
     public String createToken(String username, Set<Role> roles) {
 
-
+        System.out.println(roles.toString());
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("auth", roles.stream()
                 .map(s -> new SimpleGrantedAuthority(s.getAuthority()))
@@ -43,11 +43,12 @@ public class JwtTokenProvider {
         Time now = new Time(System.currentTimeMillis());
         Time validity = new Time(now.getTime() + Long.parseLong(Objects.requireNonNull(environment.getProperty("jwt.expire-date"))));
 
-        return Jwts.builder()//
+        return Jwts.builder()
                 .setClaims(claims)//
                 .setIssuedAt(now)//
                 .setExpiration(validity)//
-                .signWith(SignatureAlgorithm.HS512, environment.getProperty("jwt.secret"))//
+                .signWith(SignatureAlgorithm.HS512, environment.getProperty("jwt.secret"))
+
                 .compact();
     }
 }

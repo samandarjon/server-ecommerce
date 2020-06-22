@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import uz.pdp.ecommerce.entity.Role;
 import uz.pdp.ecommerce.entity.User;
 import uz.pdp.ecommerce.entity.enums.RoleName;
 import uz.pdp.ecommerce.payload.ApiResponse;
@@ -24,6 +25,7 @@ import uz.pdp.ecommerce.security.JwtErrors;
 import uz.pdp.ecommerce.security.JwtTokenProvider;
 
 import java.util.Collections;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -81,7 +83,7 @@ public class AuthService implements UserDetailsService {
             User user = userRepository.findByPhoneNumber(loginUser.getUsername())
                     .orElseThrow(() -> new UsernameNotFoundException("Bunday user mavjud emas"));
 
-            String token = jwtTokenProvider.createToken(loginUser.getUsername(), user.getRoles());
+            String token = jwtTokenProvider.createToken(String.valueOf(user.getId()), (Set<Role>) user.getAuthorities());
             return new TokenResponse(token, true);
 
         } catch (Exception e) {
