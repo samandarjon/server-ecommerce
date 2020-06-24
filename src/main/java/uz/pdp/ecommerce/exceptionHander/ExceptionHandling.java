@@ -15,6 +15,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import uz.pdp.ecommerce.exceprions.NotFoundException;
 import uz.pdp.ecommerce.payload.ApiResponse;
 
 import java.util.HashMap;
@@ -41,6 +42,12 @@ public class ExceptionHandling{
     @ExceptionHandler({UsernameNotFoundException.class})
     public ApiResponse handleUsernameNotFoundException(UsernameNotFoundException e) {
         return new ApiResponse(e.getMessage(), 401);
+    }
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler({NotFoundException.class})
+    public ApiResponse handleUsernameNotFoundException(NotFoundException e) {
+        System.out.println(e.getMessage());
+        return new ApiResponse(e.getMessage(), 404);
     }
 
 }

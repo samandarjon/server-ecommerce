@@ -3,6 +3,7 @@ spring:
     username: postgres
     password: smndr2013
     url: jdbc:postgresql://localhost:5432/ecommerce
+    initialization-mode: always
   jpa:
     hibernate:
       ddl-auto: create
@@ -13,7 +14,6 @@ spring:
   data:
     rest:
       base-path: /api
-
 server:
   port: 8080
 jwt:

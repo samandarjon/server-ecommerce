@@ -36,7 +36,7 @@ public class AddressService implements IAddressService {
 
     @Override
     public Address findActiveAddress(UUID id) {
-        return addressRepository.findByCreatedByAndActive(id, true)
+        return addressRepository.findByCreatedByAndActiveTrue(id)
                 .orElseThrow(() -> new NotFoundException("Sizda hali manzil mavjuda emas. Iltimos manzilni kiriting."));
     }
 

@@ -12,10 +12,12 @@ import uz.pdp.ecommerce.payload.ReqAddress;
 import uz.pdp.ecommerce.security.CurrentUser;
 import uz.pdp.ecommerce.service.AddressService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
-@RestController("/api/addresses")
+@RestController
+@RequestMapping("/api/addresses")
 public class AddressController {
     private final AddressService addressService;
 
@@ -37,7 +39,7 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addAddress(@RequestBody ReqAddress reqAddress, @CurrentUser User user) {
+    public ResponseEntity<?> addAddress(@Valid @RequestBody ReqAddress reqAddress, @CurrentUser User user) {
         CreatedResponse createdResponse = addressService.saveAddress(reqAddress, user.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(createdResponse);
     }

@@ -11,5 +11,5 @@ import java.util.UUID;
 public interface AddressRepository extends JpaRepository<Address, UUID> {
     List<Address> findAllByCreatedBy(UUID createdBy);
 
-    Optional<Address> findByCreatedByAndActive(UUID createdBy, boolean active);
+    Optional<Address> findByCreatedByAndActiveTrue(UUID createdBy);
 }

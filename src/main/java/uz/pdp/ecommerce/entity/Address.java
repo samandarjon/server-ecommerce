@@ -21,5 +21,5 @@ public class Address extends AGenerator {
 
     @Column(nullable = false)
     private String home;
-    private boolean isActive;
+    private boolean active;
 }
