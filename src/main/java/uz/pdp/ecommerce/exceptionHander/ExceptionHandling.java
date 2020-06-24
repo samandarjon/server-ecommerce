@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
@@ -17,12 +18,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import uz.pdp.ecommerce.payload.ApiResponse;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
-public class ExceptionHandling {
+public class ExceptionHandling{
 
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -43,6 +42,5 @@ public class ExceptionHandling {
     public ApiResponse handleUsernameNotFoundException(UsernameNotFoundException e) {
         return new ApiResponse(e.getMessage(), 401);
     }
-
 
 }

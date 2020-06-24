@@ -18,7 +18,8 @@ public class JwtErrors implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest httpServletRequest,
                          HttpServletResponse httpServletResponse,
                          AuthenticationException e) throws IOException {
-        logger.error("Bu yo'lga kirish mumkin emas. Sababi " + e.getMessage());
+        logger.error("Bu yo'lga kirish mumkin emas. Sababi " + e.getMessage() + ": " + e);
+
         httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
     }
 }
