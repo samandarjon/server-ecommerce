@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class AddressService {
+public class AddressService implements IAddressService {
     private final AddressRepository addressRepository;
     private final ModelMapper modelMapper;
 
@@ -24,6 +24,7 @@ public class AddressService {
         this.modelMapper = modelMapper;
     }
 
+    @Override
     public List<Address> findUserAddress(User user) {
         List<Address> address = addressRepository.findAllByCreatedBy(user.getId());
         if (address.size() <= 0) {
@@ -33,11 +34,13 @@ public class AddressService {
 
     }
 
+    @Override
     public Address findActiveAddress(UUID id) {
         return addressRepository.findByCreatedByAndActive(id, true)
                 .orElseThrow(() -> new NotFoundException("Sizda hali manzil mavjuda emas. Iltimos manzilni kiriting."));
     }
 
+    @Override
     public CreatedResponse saveAddress(ReqAddress reqAddress, UUID id) {
         Address address = modelMapper.map(reqAddress, Address.class);
         if (reqAddress.isActive()) {
@@ -48,5 +51,11 @@ public class AddressService {
 
         Address save = addressRepository.save(address);
         return new CreatedResponse(save.getId().toString(), "Address muvoffaqiyatli qo`shildi.");
+    }
+
+    @Override
+    public CreatedResponse delete(UUID id) {
+        addressRepository.deleteById(id);
+        return new CreatedResponse(id.toString(), "Addrees o`chirildi.");
     }
 }

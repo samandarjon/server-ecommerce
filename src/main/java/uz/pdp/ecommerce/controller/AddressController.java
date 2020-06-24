@@ -13,6 +13,7 @@ import uz.pdp.ecommerce.security.CurrentUser;
 import uz.pdp.ecommerce.service.AddressService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController("/api/addresses")
 public class AddressController {
@@ -39,5 +40,10 @@ public class AddressController {
     public ResponseEntity<?> addAddress(@RequestBody ReqAddress reqAddress, @CurrentUser User user) {
         CreatedResponse createdResponse = addressService.saveAddress(reqAddress, user.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(createdResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAddress(@PathVariable UUID id) {
+        return ResponseEntity.ok(addressService.delete(id));
     }
 }
