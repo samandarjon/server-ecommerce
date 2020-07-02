@@ -7,7 +7,6 @@ import uz.pdp.ecommerce.entity.enums.RoleName;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data
 @Entity
 public class Role implements GrantedAuthority, Serializable {
     @Id
@@ -20,5 +19,21 @@ public class Role implements GrantedAuthority, Serializable {
     @Override
     public String getAuthority() {
         return roleName.name();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public RoleName getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(RoleName roleName) {
+        this.roleName = roleName;
     }
 }

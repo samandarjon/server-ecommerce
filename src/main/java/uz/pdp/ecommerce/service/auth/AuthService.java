@@ -85,8 +85,8 @@ public class AuthService implements UserDetailsService {
 
             String token = jwtTokenProvider.createToken(String.valueOf(user.getId()), (Set<Role>) user.getAuthorities());
             return new TokenResponse(token, true);
-
         } catch (Exception e) {
+            e.printStackTrace();
             throw new UsernameNotFoundException("Username yoki parol xato.");
         }
     }

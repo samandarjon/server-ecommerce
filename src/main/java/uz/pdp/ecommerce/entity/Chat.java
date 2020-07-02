@@ -10,7 +10,6 @@ import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
 public class Chat extends AGenerator {
     @Column(nullable = false)
     private String message;
@@ -18,4 +17,19 @@ public class Chat extends AGenerator {
     @Column(nullable = false)
     private UUID receiver;
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public UUID getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(UUID receiver) {
+        this.receiver = receiver;
+    }
 }

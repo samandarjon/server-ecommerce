@@ -1,15 +1,29 @@
 package uz.pdp.ecommerce.payload;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-import javax.persistence.Id;
-import java.util.UUID;
 
-@Data
-@AllArgsConstructor
 public class CreatedResponse {
     private String id;
     private String message;
 
+    public CreatedResponse(String id, String message) {
+        this.id = id;
+        this.message = message;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

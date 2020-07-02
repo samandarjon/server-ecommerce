@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 
-@Data
 public class ReqAddress {
     private Integer zipCode;
     @NotBlank(message = "Viloyatni kiritish majburiy.")
@@ -15,4 +14,44 @@ public class ReqAddress {
     @NotBlank(message = "Qayerda yashashingizni ko`rsating.")
     private String home;
     private boolean isActive;
+
+    public Integer getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(Integer zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getHome() {
+        return home;
+    }
+
+    public void setHome(String home) {
+        this.home = home;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 }

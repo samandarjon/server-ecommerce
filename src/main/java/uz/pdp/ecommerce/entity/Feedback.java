@@ -11,11 +11,26 @@ import javax.persistence.ManyToOne;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
 public class Feedback extends AGenerator {
     private String message;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }
