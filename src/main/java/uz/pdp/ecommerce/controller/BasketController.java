@@ -12,8 +12,6 @@ import uz.pdp.ecommerce.security.CurrentUser;
 import uz.pdp.ecommerce.service.BasketService;
 
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/baskets")
