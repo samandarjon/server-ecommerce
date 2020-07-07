@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import uz.pdp.ecommerce.entity.Basket;
 import uz.pdp.ecommerce.entity.Product;
 import uz.pdp.ecommerce.entity.User;
-import uz.pdp.ecommerce.exceprions.NotFoundException;
+import uz.pdp.ecommerce.exceptions.NotFoundException;
 import uz.pdp.ecommerce.payload.ApiResponse;
 import uz.pdp.ecommerce.payload.BasketDto;
 import uz.pdp.ecommerce.repository.BasketRepository;

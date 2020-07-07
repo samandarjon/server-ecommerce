@@ -26,6 +26,14 @@ public class Order extends AGenerator implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Address address;
 
+    public Order(Product product, int amount, OrderType orderType, boolean consumerSeen, Address address) {
+        this.product = product;
+        this.amount = amount;
+        this.orderType = orderType;
+        this.consumerSeen = consumerSeen;
+        this.address = address;
+    }
+
     public Product getProduct() {
         return product;
     }
@@ -65,4 +73,8 @@ public class Order extends AGenerator implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public Order() {
+    }
+
 }

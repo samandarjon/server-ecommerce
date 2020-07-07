@@ -1,12 +1,12 @@
 package uz.pdp.ecommerce.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import uz.pdp.ecommerce.entity.template.AGenerator;
 
-import javax.persistence.*;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +15,8 @@ import java.util.Map;
 public class Product extends AGenerator {
     private String title;
     private String description;
-    //    TODO Attachment product images;
+    @OneToMany(targetEntity = Attachment.class)
+    private List<Attachment> attachments;
     private double price;
 
     @ManyToOne
@@ -29,13 +30,14 @@ public class Product extends AGenerator {
     public Product() {
     }
 
-    public Product(String title, String description, double price, Category category, List<Feedback> feedback, Map<String, String> aboutMoreProduct) {
+    public Product(String title, String description, double price, Category category, List<Feedback> feedback, Map<String, String> aboutMoreProduct, List<Attachment> attachments) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.category = category;
         this.feedback = feedback;
         this.aboutMoreProduct = aboutMoreProduct;
+        this.attachments = attachments;
     }
 
     public String getTitle() {
@@ -84,5 +86,13 @@ public class Product extends AGenerator {
 
     public void setAboutMoreProduct(Map<String, String> aboutMoreProduct) {
         this.aboutMoreProduct = aboutMoreProduct;
+    }
+
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.ecommerce.entity.Address;
 import uz.pdp.ecommerce.entity.User;
-import uz.pdp.ecommerce.exceprions.NotFoundException;
+import uz.pdp.ecommerce.exceptions.NotFoundException;
 import uz.pdp.ecommerce.payload.CreatedResponse;
 import uz.pdp.ecommerce.payload.ReqAddress;
 import uz.pdp.ecommerce.repository.AddressRepository;

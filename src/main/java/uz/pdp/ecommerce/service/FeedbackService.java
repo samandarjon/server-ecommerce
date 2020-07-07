@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.ecommerce.entity.Feedback;
 import uz.pdp.ecommerce.entity.Product;
-import uz.pdp.ecommerce.exceprions.NotFoundException;
+import uz.pdp.ecommerce.exceptions.NotFoundException;
 import uz.pdp.ecommerce.payload.ApiResponse;
 import uz.pdp.ecommerce.payload.FeedbackMessage;
 import uz.pdp.ecommerce.repository.FeedbackRepository;
