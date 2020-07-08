@@ -1,13 +1,14 @@
 package uz.pdp.ecommerce.payload;
 
 
-import lombok.Data;
-
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class ProductDto {
     private String title;
     private String description;
+    private List<UUID> files;
     private double price;
     private Map<String, String> aboutMoreProduct;
 
@@ -41,5 +42,13 @@ public class ProductDto {
 
     public void setAboutMoreProduct(Map<String, String> aboutMoreProduct) {
         this.aboutMoreProduct = aboutMoreProduct;
+    }
+
+    public List<UUID> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<UUID> files) {
+        this.files = files;
     }
 }
