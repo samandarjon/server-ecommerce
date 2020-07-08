@@ -1,6 +1,7 @@
 package uz.pdp.ecommerce.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +20,9 @@ public class DateLoader {
     final BCryptPasswordEncoder bCryptPasswordEncoder;
     final UserRepository userRepository;
 
+    @Value("${spring.datasource.initialization-mode}")
+    private String initializationMode;
+
     @Autowired
     public DateLoader(BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository, UserRepository userRepository) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -29,22 +33,24 @@ public class DateLoader {
     @Bean
     CommandLineRunner runner() {
         return (a) -> {
-            User user = new User("Samandar",
-                    "Akbarov",
-                    "samandar_akbarov",
-                    "+998905896958",
-                    bCryptPasswordEncoder.encode("smndr2013"),
-                    new HashSet<>(roleRepository.findAll())
-            );
-            User user2 = new User("User",
-                    "User",
-                    "user",
-                    "123456",
-                    bCryptPasswordEncoder.encode("test"),
-                    Collections.singleton((roleRepository.findByRoleName(RoleName.ROLE_USER)))
-            );
-            userRepository.save(user);
-            userRepository.save(user2);
+            if (initializationMode.equals("always")) {
+                User user = new User("Samandar",
+                        "Akbarov",
+                        "samandar_akbarov",
+                        "+998905896958",
+                        bCryptPasswordEncoder.encode("smndr2013"),
+                        new HashSet<>(roleRepository.findAll())
+                );
+                User user2 = new User("User",
+                        "User",
+                        "user",
+                        "123456",
+                        bCryptPasswordEncoder.encode("test"),
+                        Collections.singleton((roleRepository.findByRoleName(RoleName.ROLE_USER)))
+                );
+                userRepository.save(user);
+                userRepository.save(user2);
+            }
         };
     }
 
