@@ -1,6 +1,5 @@
 package uz.pdp.ecommerce.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -68,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+
                 .cors()
                 .and()
                 .csrf()
@@ -79,15 +79,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/api/auth/**").permitAll()
-                    .antMatchers("/api/categories/**").hasAnyRole("ADMIN")
+                .antMatchers("/**").permitAll()
+                .antMatchers("/h2").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
+                .antMatchers("/api/categories/**").hasAnyRole("ADMIN")
                 .anyRequest().authenticated();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.headers().frameOptions().disable();
     }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         //@formatter:off
         super.configure(web);
+//        web.ignoring().antMatchers("/v2/api-docs",
+//                "/configuration/ui",
+//                "/swagger-resources/**",
+//                "/configuration/security",
+//                "/swagger-ui.html",
+//                "/webjars/**");
         web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
     }
 

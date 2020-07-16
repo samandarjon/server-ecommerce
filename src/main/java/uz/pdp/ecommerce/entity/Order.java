@@ -1,5 +1,6 @@
 package uz.pdp.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import uz.pdp.ecommerce.entity.enums.OrderType;
@@ -10,7 +11,8 @@ import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "orders")
-public class Order extends AGenerator implements Serializable {
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
+public class Order extends AGenerator  {
 
     @ManyToOne
     private Product product;

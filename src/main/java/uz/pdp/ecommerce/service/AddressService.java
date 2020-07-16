@@ -2,6 +2,7 @@ package uz.pdp.ecommerce.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import uz.pdp.ecommerce.entity.Address;
 import uz.pdp.ecommerce.entity.User;
@@ -55,7 +56,13 @@ public class AddressService implements IAddressService {
 
     @Override
     public CreatedResponse delete(UUID id) {
-        addressRepository.deleteById(id);
+        try {
+            addressRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFoundException("O`chish uchun mavjud element tanlanmagan.\n " +
+                    "Iltimos qaytadan urunib ko`ring." +
+                    "\n Yoki qo`llab quvvatlashga murojat qiling.");
+        }
         return new CreatedResponse(id.toString(), "Addrees o`chirildi.");
     }
 }

@@ -13,4 +13,6 @@ public interface ProductConverter {
     ProductDto productToProductDto(Product product);
 
     List<ProductDto> productListToProductDtos(List<Product> products);
+
+    Product productDtoToProduct(ProductDto productDto);
 }

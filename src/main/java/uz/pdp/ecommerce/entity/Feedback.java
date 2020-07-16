@@ -1,7 +1,6 @@
 package uz.pdp.ecommerce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import uz.pdp.ecommerce.entity.template.AGenerator;
 

@@ -19,7 +19,7 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<?> getAllProduct(@RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam("user") UUID user) {
+    public ResponseEntity<?> getAllProduct(@RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "user", defaultValue = "") UUID user) {
         return ResponseEntity.ok(productService.getAll(page, user));
     }
 
@@ -34,6 +34,12 @@ public class ProductController {
             user) {
         Product update = productService.update(productDto, id, user.getId());
         return ResponseEntity.ok(update);
+    }
+
+    @PostMapping("/{categoryId}")
+    public ResponseEntity<?> addProduct(@RequestBody ProductDto productDto, @PathVariable Long categoryId) {
+        Product add = productService.add(productDto, categoryId);
+        return ResponseEntity.ok(add);
     }
 
     @DeleteMapping("/{id}")

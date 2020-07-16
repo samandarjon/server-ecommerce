@@ -1,17 +1,16 @@
 package uz.pdp.ecommerce.payload;
 
 import javax.validation.constraints.NotBlank;
-import java.util.UUID;
 
 public class ProductId {
     @NotBlank(message = "Mahuslot bosilmadi")
-    private UUID productId;
+    private String productId;
 
-    public UUID getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(UUID productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 }

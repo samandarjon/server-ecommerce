@@ -14,9 +14,18 @@ spring:
   data:
     rest:
       base-path: /api
-
+  h2:
+    console:
+      path: /h2
+      enabled: true
 server:
   port: 8080
 jwt:
   secret: jwtsecretkey
   expire-date: 8640000
+springdoc:
+  swagger-ui:
+    path: /doc
+    operationsSorter: method
+  api-docs:
+    path: /api-docs

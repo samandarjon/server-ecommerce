@@ -60,7 +60,17 @@ public class OrderService {
         return new ApiResponse("Buyurtma holati o`zgartirildi.", 200);
     }
 
-    public Order getOne(UUID id) {
-        return orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Bunday buyurtma topiladi."));
+    public Order getOne(UUID id, UUID userId) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Bunday buyurtma topiladi."));
+        if (order.getProduct().getCreatedBy().equals(userId)) {
+            order.setConsumerSeen(true);
+        }
+        orderRepository.save(order);
+        return order;
+    }
+
+    public Page<Order> sellerOrders(UUID id, Integer page) {
+        return orderRepository.findByProductCreatedBy(id, PageRequest.of(page, 10));
+
     }
 }

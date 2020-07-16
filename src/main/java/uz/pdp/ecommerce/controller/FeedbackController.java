@@ -22,7 +22,7 @@ public class FeedbackController {
     private FeedbackService feedbackService;
 
     @GetMapping
-    public ResponseEntity<?> getAllFeedbackOfProduct(@RequestParam UUID productId) {
+    public ResponseEntity<?> getAllFeedbackOfProduct(@RequestParam(defaultValue = "productId") UUID productId) {
         List<FeedbackMessage> productFeedback = feedbackService.findProductFeedback(productId);
         return ResponseEntity.ok(productFeedback);
     }

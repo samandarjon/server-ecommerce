@@ -36,7 +36,7 @@ public class BasketService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Bunday mahsulot topilmadi."));
         basket.setProduct(product);
-        productRepository.save(product);
+        basketRepository.save(basket);
         return new ApiResponse("Mahuslot savatga qo`shildi.", 201);
 
     }

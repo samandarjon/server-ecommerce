@@ -36,6 +36,6 @@ public class FeedbackService {
 
     public ApiResponse delete(UUID id) {
         feedbackRepository.deleteById(id);
-        return new ApiResponse("Yozishma o`chirildi",200);
+        return new ApiResponse("Yozishma o`chirildi", 200);
     }
 }

@@ -2,7 +2,6 @@ package uz.pdp.ecommerce.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.ecommerce.entity.Order;
@@ -22,7 +21,7 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<?> getUserOrders(
-            @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
             @CurrentUser User user) {
         Page<Order> orders = orderService.getOrders(page, user.getId());
 
@@ -30,9 +29,16 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOneOrder(@PathVariable UUID id) {
-        Order one = orderService.getOne(id);
+    public ResponseEntity<?> getOneOrder(@PathVariable UUID id, @CurrentUser User user) {
+        Order one = orderService.getOne(id, user.getId());
         return ResponseEntity.ok(one);
+    }
+
+    @GetMapping("/seller")
+    public ResponseEntity<?> getSellerOrder(@CurrentUser User user,
+                                            @RequestParam(value = "page", defaultValue = "0") Integer page) {
+        Page<Order> orders = orderService.sellerOrders(user.getId(), page);
+        return ResponseEntity.ok(orders);
     }
 
     @PutMapping("/{id}")

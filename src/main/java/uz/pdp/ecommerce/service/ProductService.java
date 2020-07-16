@@ -5,13 +5,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import uz.pdp.ecommerce.entity.Attachment;
+import uz.pdp.ecommerce.entity.Category;
 import uz.pdp.ecommerce.entity.Product;
 import uz.pdp.ecommerce.exceptions.MethodNotAllowed;
 import uz.pdp.ecommerce.exceptions.NotFoundException;
 import uz.pdp.ecommerce.payload.ApiResponse;
 import uz.pdp.ecommerce.payload.ProductDto;
 import uz.pdp.ecommerce.repository.AttachmentRepository;
+import uz.pdp.ecommerce.repository.CategoryRepository;
 import uz.pdp.ecommerce.repository.ProductRepository;
+import uz.pdp.ecommerce.utils.convertors.ProductConverter;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,9 +27,13 @@ public class ProductService {
     private ProductRepository productRepository;
     @Autowired
     private AttachmentRepository attachmentRepository;
+    @Autowired
+    private ProductConverter productConverter;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public Page<Product> getAll(Integer page, UUID user) {
-        if (user == null) {
+        if (user == null || user.toString().isEmpty()) {
             return productRepository.findAll(PageRequest.of(page, 20));
         }
         return productRepository.findAllByCreatedBy(user, PageRequest.of(page, 20));
@@ -53,6 +60,16 @@ public class ProductService {
                     }
                     return attachment;
                 })).collect(Collectors.toList());
+        return productRepository.save(product);
+    }
+
+    public Product add(ProductDto productDto, Long categoryId) {
+        Category category = categoryRepository.findById(categoryId).orElseThrow(()
+                -> new NotFoundException("Bunday Kategoriya mavjud emas."));
+        Product product = productConverter.productDtoToProduct(productDto);
+        List<Attachment> attachments = attachmentRepository.findAllByIdIn(productDto.getFiles());
+        product.setAttachments(attachments);
+        product.setCategory(category);
         return productRepository.save(product);
     }
 

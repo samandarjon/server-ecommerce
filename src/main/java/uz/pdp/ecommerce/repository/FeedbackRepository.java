@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface FeedbackRepository extends JpaRepository<Feedback, UUID> {
-    @Query("select p.id, p.message, u.firstName as user from Feedback p join users u on u.id=p.createdBy where p.id = :id")
+    @Query("select NEW  uz.pdp.ecommerce.payload.FeedbackMessage(p.id, p.message, u.firstName ) from Feedback p join users u on u.id=p.createdBy where p.product.id = :id")
     List<FeedbackMessage> getFeedback(@Param("id") UUID id);
+
 }

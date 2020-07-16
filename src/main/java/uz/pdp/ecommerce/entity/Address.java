@@ -1,6 +1,6 @@
 package uz.pdp.ecommerce.entity;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.EqualsAndHashCode;
 import uz.pdp.ecommerce.entity.template.AGenerator;
 
@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Address extends AGenerator {
     private Integer zipCode;
 
