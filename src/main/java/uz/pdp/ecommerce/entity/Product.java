@@ -25,7 +25,7 @@ public class Product extends AGenerator {
     private List<Feedback> feedback;
 
     @ElementCollection
-    private Map<String, String> aboutMoreProduct;
+        private Map<String, String> aboutMoreProduct;
 
     public Product() {
     }

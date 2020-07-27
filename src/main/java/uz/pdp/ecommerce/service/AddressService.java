@@ -23,6 +23,15 @@ public class AddressService implements IAddressService {
     public AddressService(AddressRepository addressRepository, ModelMapper modelMapper) {
         this.addressRepository = addressRepository;
         this.modelMapper = modelMapper;
+        System.out.println("********");
+        System.out.println("      **\n" +
+                "      **\n" +
+                "      **");
+        System.out.println("**    **\n" +
+                "**    **\n" +
+                " *******");
+
+
     }
 
     @Override

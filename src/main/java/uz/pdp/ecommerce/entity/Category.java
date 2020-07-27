@@ -15,8 +15,6 @@ public class Category implements Serializable {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany
-    private List<Category> categories;
 
     public Long getId() {
         return id;
@@ -32,14 +30,6 @@ public class Category implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
     }
 }
 

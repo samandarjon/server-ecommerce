@@ -1,7 +1,8 @@
 package uz.pdp.ecommerce.payload;
 
-import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
@@ -9,12 +10,12 @@ public class CreateUserDto {
     @NotBlank(message = "Parol bo`sh bo`lmasligi kerak.")
     private String password;
     @NotBlank(message = "Tasdiqlovchi parol bo`sh bo`lmasligi kerak.")
-    @Min(message = "Parol ", value = 4)
     private String password2;
     @NotBlank(message = "Telefon raqam bo`sh bo`lmasligi kerak.")
     private String phoneNumber;
     @NotBlank(message = "Familiya bo`sh bo`lmasligi kerak.")
     private String lastName;
+    @NotBlank(message = "Ism bo`sh bo`lmasligi kerak.")
     private String firstName;
 
     public String getPassword() {

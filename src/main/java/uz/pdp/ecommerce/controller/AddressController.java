@@ -1,7 +1,11 @@
 package uz.pdp.ecommerce.controller;
 
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +21,15 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@ApiResponses(value = {@ApiResponse(responseCode = "404",
+        content = @Content(mediaType = "application/json",
+                schema = @Schema(implementation = uz.pdp.ecommerce.payload.ApiResponse.class))),
+        @ApiResponse(responseCode = "400",
+                content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = uz.pdp.ecommerce.payload.ApiResponse.class))),
+        @ApiResponse(responseCode = "401    ",
+                content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = uz.pdp.ecommerce.payload.ApiResponse.class)))})
 @RequestMapping("/api/addresses")
 public class AddressController {
     private final AddressService addressService;
@@ -26,8 +39,16 @@ public class AddressController {
         this.addressService = addressService;
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(
+                    description = "Get all the addresses that belong to yourself",
+                    responseCode = "200",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Address.class)))
+
+    })
     @GetMapping
-    public ResponseEntity<?> getAllOwnAddress(@CurrentUser User user) {
+    public ResponseEntity<?> getAllOwnAddress(@Parameter(hidden = true) @CurrentUser User user) {
         List<Address> userAddress = addressService.findUserAddress(user);
         return ResponseEntity.ok(userAddress);
     }

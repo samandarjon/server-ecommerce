@@ -14,7 +14,7 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .components(new Components())
-                .info(new Info().title("Barbershop system API doc").description(
+                .info(new Info().title("Ecommerce API doc").description(
                         "This is a sample Spring Boot RESTfull service using springdoc-openapi and OpenAPI 3."));
     }
 }

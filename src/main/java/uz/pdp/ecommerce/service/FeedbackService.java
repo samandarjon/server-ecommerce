@@ -31,7 +31,7 @@ public class FeedbackService {
         feedback.setMessage(message);
         feedback.setProduct(product);
         feedbackRepository.save(feedback);
-        return new ApiResponse("Mahsulot qo`shildi", 201);
+        return new ApiResponse("Feedback qo`shildi.l", 201);
     }
 
     public ApiResponse delete(UUID id) {
