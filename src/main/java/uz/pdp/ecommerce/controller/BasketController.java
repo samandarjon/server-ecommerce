@@ -36,8 +36,8 @@ public class BasketController {
             e.printStackTrace();
             throw new NotFoundException("Bunday mahsulot topilmadi");
         }
-        ApiResponse apiResponse = basketService.addBasket(user, id);
-        return ResponseEntity.status(apiResponse.getStatus()).body(apiResponse);
+        List<BasketDto> basketDtos = basketService.addBasket(user, id);
+        return ResponseEntity.ok(basketDtos);
     }
 
     @DeleteMapping("/{id}")

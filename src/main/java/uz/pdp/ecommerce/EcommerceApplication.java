@@ -1,11 +1,9 @@
 package uz.pdp.ecommerce;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import uz.pdp.ecommerce.entity.User;
 
 @SpringBootApplication
 public class EcommerceApplication {
@@ -18,6 +16,16 @@ public class EcommerceApplication {
     ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(@NotNull CorsRegistry registry) {
+//                registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+//            }
+//        };
+//    }
 }
 
 

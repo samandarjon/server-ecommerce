@@ -6,11 +6,20 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ProductDto {
+    private UUID id;
     private String title;
     private String description;
     private List<UUID> files;
     private double price;
     private Map<String, String> aboutMoreProduct;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

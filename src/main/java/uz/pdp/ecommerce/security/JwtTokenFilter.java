@@ -33,6 +33,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                                     @NotNull HttpServletResponse response,
                                     @NotNull FilterChain filterChain) throws ServletException, IOException {
 
+
         try {
             String token = request.getHeader("Authorization");
             if (token != null) {
@@ -55,6 +56,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         } catch (Exception e) {
             logger.error("Could not set user authentication in security context", e);
         }
+//        addCorsHeader(response);
         filterChain.doFilter(request, response);
     }
 
@@ -86,6 +88,14 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+
+    private void addCorsHeader(HttpServletResponse response){
+        //TODO: externalize the Allow-Origin
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+        response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Max-Age", "1728000");
     }
 
 }

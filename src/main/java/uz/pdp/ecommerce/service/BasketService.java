@@ -30,14 +30,15 @@ public class BasketService {
 
     }
 
-    public ApiResponse addBasket(User user, UUID productId) {
+    public List<BasketDto> addBasket(User user, UUID productId) {
         Basket basket = new Basket();
         basket.setUserId(user.getId());
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Bunday mahsulot topilmadi."));
         basket.setProduct(product);
         basketRepository.save(basket);
-        return new ApiResponse("Mahuslot savatga qo`shildi.", 201);
+        List<BasketDto> userBasketItem = findUserBasketItem(user.getId());
+        return  userBasketItem;
 
     }
 
