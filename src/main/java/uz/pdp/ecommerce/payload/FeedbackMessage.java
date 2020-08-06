@@ -10,10 +10,10 @@ public class FeedbackMessage {
     public FeedbackMessage() {
     }
 
-    public FeedbackMessage(UUID id, String message, String user) {
+    public FeedbackMessage(UUID id, String message, String firstName, String lastName) {
         this.id = id;
         this.message = message;
-        this.user = user;
+        this.user = firstName + " " + lastName;
     }
 
     public UUID getId() {

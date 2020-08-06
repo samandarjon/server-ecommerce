@@ -82,10 +82,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/", "/css/*", "/js/*", "/img/*").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/products").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/products/**").permitAll()
                 .antMatchers("/h2").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/feedback/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/attach/preview/**").permitAll()
                 .antMatchers("/api/categories/**").hasAnyRole("ADMIN")
                 .anyRequest().authenticated();
