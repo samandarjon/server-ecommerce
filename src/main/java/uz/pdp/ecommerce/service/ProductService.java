@@ -18,8 +18,6 @@ import uz.pdp.ecommerce.utils.convertors.ProductConverter;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class ProductService {
@@ -46,20 +44,19 @@ public class ProductService {
 
     public Product update(ProductDto productDto, UUID productId, UUID user) {
         Product product = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("Bunday mahsulot topilmadi."));
+        if (product.getAttachments().get(0).getId() != productDto.getFiles().get(0)) {
+            List<Attachment> attachments = attachmentRepository.findAllByIdIn(productDto.getFiles());
+            if (attachments.size() <= 0) {
+                throw new NotFoundException("Photo not found.");
+            }
+            product.setAttachments(attachments);
+        }
         if (!product.getCreatedBy().equals(user))
             throw new MethodNotAllowed("Siz uchun bunday amaliyot mumkin emas.");
         product.setTitle(productDto.getTitle());
         product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
         product.setAboutMoreProduct(productDto.getAboutMoreProduct());
-        List<Stream<Attachment>> collect = productDto.getFiles().stream().map(uuid ->
-                product.getAttachments().stream().map(attachment -> {
-                    if (!uuid.equals(attachment.getId())) {
-                        return attachmentRepository.findById(uuid)
-                                .orElseThrow(() -> new NotFoundException("Bunday file topilmadi."));
-                    }
-                    return attachment;
-                })).collect(Collectors.toList());
         return productRepository.save(product);
     }
 

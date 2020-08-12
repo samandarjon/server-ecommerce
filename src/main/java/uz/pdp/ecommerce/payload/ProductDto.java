@@ -1,15 +1,19 @@
 package uz.pdp.ecommerce.payload;
 
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 public class ProductDto {
     private UUID id;
+    @NotBlank(message = "Title mustn't blank")
     private String title;
+    @NotBlank(message = "Description mustn't blank")
     private String description;
     private List<UUID> files;
+    @NotBlank(message = "Price mustn't blank")
     private double price;
     private Map<String, String> aboutMoreProduct;
 
