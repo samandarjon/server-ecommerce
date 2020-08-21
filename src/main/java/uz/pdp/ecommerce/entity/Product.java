@@ -3,10 +3,7 @@ package uz.pdp.ecommerce.entity;
 import lombok.EqualsAndHashCode;
 import uz.pdp.ecommerce.entity.template.AGenerator;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Map;
 
@@ -15,13 +12,13 @@ import java.util.Map;
 public class Product extends AGenerator {
     private String title;
     private String description;
-    @OneToMany(targetEntity = Attachment.class)
+    @OneToMany(targetEntity = Attachment.class, cascade = CascadeType.REMOVE)
     private List<Attachment> attachments;
     private double price;
 
     @ManyToOne
     private Category category;
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Feedback> feedback;
 
     @ElementCollection

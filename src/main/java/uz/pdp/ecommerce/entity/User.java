@@ -1,8 +1,5 @@
 package uz.pdp.ecommerce.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +13,7 @@ import java.util.UUID;
 
 @Entity(name = "users")
 public class User implements Serializable, UserDetails {
+
     @Id
     @Type(type = "org.hibernate.type.PostgresUUIDType")
     @GeneratedValue(generator = "uuid2")
@@ -28,16 +26,16 @@ public class User implements Serializable, UserDetails {
     @Column(nullable = false)
     private String lastName;
 
-//    @Column(nullable = false)
+    //    @Column(nullable = false)
     private String username;
 
     private String phoneNumber;
 
     private String password;
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(name = "user_role",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+            joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", nullable = false, updatable = false)})
     private Set<Role> roles;
 
     private boolean accountNonExpired = true;
@@ -48,6 +46,11 @@ public class User implements Serializable, UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
+    }
+
+    @PreRemove
+    private void removeUserRole() {
+        roles.clear();
     }
 
     public User() {

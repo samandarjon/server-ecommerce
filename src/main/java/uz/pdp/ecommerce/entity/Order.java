@@ -14,7 +14,7 @@ import java.io.Serializable;
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Order extends AGenerator  {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Product product;
     @Column(nullable = false)
 

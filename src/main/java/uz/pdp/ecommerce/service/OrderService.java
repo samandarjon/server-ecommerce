@@ -70,7 +70,7 @@ public class OrderService {
     }
 
     public Page<Order> sellerOrders(UUID id, Integer page) {
-        return orderRepository.findByProductCreatedBy(id, PageRequest.of(page, 10));
+        return orderRepository.findByProductCreatedByOrderByCreatedAt(id, PageRequest.of(page, 10));
 
     }
 }

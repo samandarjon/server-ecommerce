@@ -2,12 +2,13 @@ package uz.pdp.ecommerce.entity;
 
 import uz.pdp.ecommerce.entity.template.AGenerator;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Entity
 public class AttachmentContent extends AGenerator {
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Attachment attachment;
 
     private byte[] content;

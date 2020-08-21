@@ -24,7 +24,6 @@ public class OrderController {
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @CurrentUser User user) {
         Page<Order> orders = orderService.getOrders(page, user.getId());
-
         return ResponseEntity.ok(orders);
     }
 

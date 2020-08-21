@@ -9,5 +9,5 @@ import java.util.UUID;
 
 public interface OrderRepository extends JpaRepository<Order, UUID> {
     Page<Order> findByCreatedBy(UUID createdBy, Pageable pageable);
-    Page<Order> findByProductCreatedBy(UUID product_createdBy, Pageable pageable);
+    Page<Order> findByProductCreatedByOrderByCreatedAt(UUID product_createdBy, Pageable pageable);
 }
