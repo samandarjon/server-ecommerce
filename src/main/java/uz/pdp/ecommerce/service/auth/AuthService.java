@@ -21,7 +21,6 @@ import uz.pdp.ecommerce.payload.LoginUser;
 import uz.pdp.ecommerce.payload.TokenResponse;
 import uz.pdp.ecommerce.repository.RoleRepository;
 import uz.pdp.ecommerce.repository.UserRepository;
-import uz.pdp.ecommerce.security.JwtErrors;
 import uz.pdp.ecommerce.security.JwtTokenProvider;
 
 import java.util.Collections;
@@ -34,15 +33,16 @@ public class AuthService implements UserDetailsService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
+    private final Logger logger = LoggerFactory.getLogger("Auth Service");
 
     @Autowired
     public AuthService(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
@@ -83,10 +83,11 @@ public class AuthService implements UserDetailsService {
             User user = userRepository.findByPhoneNumber(loginUser.getUsername())
                     .orElseThrow(() -> new UsernameNotFoundException("Bunday user mavjud emas"));
 
-            String token = jwtTokenProvider.createToken(String.valueOf(user.getId()), (Set<Role>) user.getAuthorities());
+            String token = jwtTokenProvider.createToken(String.valueOf(user.getId()), (Set<Role>) user.getAuthorities() );
             return new TokenResponse(token, true);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Username yoki parol xato.", loginUser);
+//            e.printStackTrace();
             throw new UsernameNotFoundException("Username yoki parol xato.");
         }
     }

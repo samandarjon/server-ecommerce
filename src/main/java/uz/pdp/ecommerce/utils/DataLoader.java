@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 @Component
-public class DateLoader {
+public class DataLoader {
     final RoleRepository roleRepository;
     final BCryptPasswordEncoder bCryptPasswordEncoder;
     final UserRepository userRepository;
@@ -24,7 +24,7 @@ public class DateLoader {
     private String initializationMode;
 
     @Autowired
-    public DateLoader(BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository, UserRepository userRepository) {
+    public DataLoader(BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository, UserRepository userRepository) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;

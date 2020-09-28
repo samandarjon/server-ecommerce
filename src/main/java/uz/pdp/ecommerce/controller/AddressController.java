@@ -47,8 +47,10 @@ public class AddressController {
                             schema = @Schema(implementation = Address.class)))
 
     })
+
     @GetMapping
     public ResponseEntity<?> getAllOwnAddress(@Parameter(hidden = true) @CurrentUser User user) {
+
         List<Address> userAddress = addressService.findUserAddress(user);
         return ResponseEntity.ok(userAddress);
     }

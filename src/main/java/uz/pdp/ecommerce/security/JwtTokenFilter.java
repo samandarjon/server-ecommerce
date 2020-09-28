@@ -33,6 +33,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                                     @NotNull HttpServletResponse response,
                                     @NotNull FilterChain filterChain) throws ServletException, IOException {
 
+        long startTime = System.currentTimeMillis();
+
 
         try {
             String token = request.getHeader("Authorization");
@@ -57,6 +59,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             logger.error("Could not set user authentication in security context", e);
         }
         filterChain.doFilter(request, response);
+        long duration = System.currentTimeMillis() - startTime;
+        logger.info(String.format("%s Method, %s Path, %s ms",request.getMethod(), request.getRequestURI(), duration));
     }
 
 
