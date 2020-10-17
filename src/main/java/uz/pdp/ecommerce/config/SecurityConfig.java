@@ -15,14 +15,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import uz.pdp.ecommerce.security.JwtErrors;
 import uz.pdp.ecommerce.security.JwtTokenFilter;
 import uz.pdp.ecommerce.service.auth.AuthService;
-
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -81,7 +76,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/css/*", "/js/*", "/img/*").permitAll()
+                .antMatchers("/",
+                        "/favicon.ico",
+                        "/**/*.png",
+                        "/**/*.gif",
+                        "/**/*.svg",
+                        "/**/*.jpg",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/products/**").permitAll()
                 .antMatchers("/h2").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
@@ -94,29 +97,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
     }
 
-//    @Bean
-//    CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-//        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
-
-//    @Bean
-
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        //@formatter:off
-//        super.configure(web);
-////        web.ignoring().antMatchers("/v2/api-docs",
-////                "/configuration/ui",
-////                "/swagger-resources/**",
-////                "/configuration/security",
-////                "/swagger-ui.html",
-////                "/webjars/**");
-//        web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
-//    }
 
 }

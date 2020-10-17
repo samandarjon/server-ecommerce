@@ -17,15 +17,6 @@ public class EcommerceApplication {
         return new ModelMapper();
     }
 
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurer() {
-//            @Override
-//            public void addCorsMappings(@NotNull CorsRegistry registry) {
-//                registry.addMapping("/**").allowedOrigins("http://localhost:3000");
-//            }
-//        };
-//    }
 }
 
 

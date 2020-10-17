@@ -21,7 +21,7 @@ spring:
 server:
   port: 8080
 jwt:
-  secret: jwtsecretkey
+  secret: hellowoldsdfsdfdsfgadszo3e48973w@@@^%$^%$%^kjdfhskjlfhskj
   expire-date: 8640000
 springdoc:
   swagger-ui:

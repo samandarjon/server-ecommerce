@@ -67,6 +67,12 @@ public class AddressController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdResponse);
     }
 
+    @PutMapping
+    public ResponseEntity<?> updateAddress(@Valid @RequestBody ReqAddress reqAddress, @CurrentUser User user) {
+        CreatedResponse createdResponse = addressService.update(reqAddress, user.getId());
+        return ResponseEntity.status(HttpStatus.OK).body(createdResponse);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAddress(@PathVariable UUID id) {
         return ResponseEntity.ok(addressService.delete(id));

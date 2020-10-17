@@ -1,11 +1,10 @@
 package uz.pdp.ecommerce.payload;
 
-import lombok.Data;
-
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
+import java.util.UUID;
 
 public class ReqAddress {
+    private UUID id;
     private Integer zipCode;
     @NotBlank(message = "Viloyatni kiritish majburiy.")
     private String province;
@@ -14,6 +13,14 @@ public class ReqAddress {
     @NotBlank(message = "Qayerda yashashingizni ko`rsating.")
     private String home;
     private boolean isActive;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public Integer getZipCode() {
         return zipCode;

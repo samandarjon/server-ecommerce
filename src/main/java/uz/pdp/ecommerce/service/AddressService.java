@@ -65,4 +65,15 @@ public class AddressService implements IAddressService {
         }
         return new CreatedResponse(id.toString(), "Addrees o`chirildi.");
     }
+
+    public CreatedResponse update(ReqAddress reqAddress, UUID id) {
+        try {
+            Address address = modelMapper.map(reqAddress, Address.class);
+            final Address save = addressRepository.save(address);
+            return new CreatedResponse(save.getId().toString(), "Address muvoffaqiyatli o`zgartirildi.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Something is wrong");
+        }
+    }
 }
