@@ -20,6 +20,8 @@ spring:
       enabled: true
 server:
   port: 8080
+  servlet:
+    context-path: /
 jwt:
   secret: hellowoldsdfsdfdsfgadszo3e48973w@@@^%$^%$%^kjdfhskjlfhskj
   expire-date: 8640000

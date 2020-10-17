@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import uz.pdp.ecommerce.security.JwtErrors;
 import uz.pdp.ecommerce.security.JwtTokenFilter;
 import uz.pdp.ecommerce.service.auth.AuthService;
@@ -77,14 +78,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/",
-                        "/favicon.ico",
-                        "/**/*.png",
-                        "/**/*.gif",
-                        "/**/*.svg",
-                        "/**/*.jpg",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js").permitAll()
+                        "/static/**"
+                        ).permitAll()
                 .antMatchers(HttpMethod.GET, "/api/products/**").permitAll()
                 .antMatchers("/h2").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
@@ -96,6 +91,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         http.headers().frameOptions().disable();
     }
+
+
 
 
 }
