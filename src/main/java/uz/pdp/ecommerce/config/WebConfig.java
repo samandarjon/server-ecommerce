@@ -21,14 +21,14 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:3000")
                 .allowedMethods("GET", "POST", "DELETE", "PUT");
     }
-    @Override
-    public void addResourceHandlers(@NotNull ResourceHandlerRegistry registry) {
-        WebMvcConfigurer.super.addResourceHandlers(registry);
-        registry.addResourceHandler("/static")
-                .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS).setCachePeriod(CACHE_PERIOD);
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS).setCachePeriod(CACHE_PERIOD);
-    }
+//    @Override
+//    public void addResourceHandlers(@NotNull ResourceHandlerRegistry registry) {
+//        WebMvcConfigurer.super.addResourceHandlers(registry);
+//        registry.addResourceHandler("/static")
+//                .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS).setCachePeriod(CACHE_PERIOD);
+//        registry.addResourceHandler("/webjars/**")
+//                .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS).setCachePeriod(CACHE_PERIOD);
+//    }
 
 
 
