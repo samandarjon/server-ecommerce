@@ -1,22 +1,22 @@
 package uz.pdp.ecommerce.payload;
 
-import javax.swing.*;
+
 import java.util.UUID;
 
-public class CreatedResponse {
-    private String id;
+public class FeedBackReq {
+    private UUID id;
     private String message;
 
-    public CreatedResponse(String id, String message) {
+    public FeedBackReq(UUID id, String message) {
         this.id = id;
         this.message = message;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.ecommerce.payload.ApiResponse;
-import uz.pdp.ecommerce.payload.CreatedResponse;
+import uz.pdp.ecommerce.payload.FeedBackReq;
 import uz.pdp.ecommerce.payload.FeedbackMessage;
 import uz.pdp.ecommerce.service.FeedbackService;
 
@@ -25,9 +25,9 @@ public class FeedbackController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addFeedback(@RequestBody CreatedResponse feedback) {
+    public ResponseEntity<?> addFeedback(@RequestBody FeedBackReq feedback) {
 //        product_id = feedback.getId()
-        ApiResponse response = feedbackService.createFeedback(UUID.fromString(feedback.getId()), feedback.getMessage());
+        ApiResponse response = feedbackService.createFeedback(feedback.getId(), feedback.getMessage());
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
