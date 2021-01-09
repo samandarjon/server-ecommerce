@@ -7,4 +7,5 @@
 3. Auth with JWT
 3. MapStruct for DTO
 ```
-https://stormy-springs-39153.herokuapp.com/
+Frontend: https://anor-ecommerce.netlify.app/
+Backend: https://anor-ecommerce.herokuapp.com/
