@@ -25,13 +25,19 @@ public class FeedbackService {
     }
 
     public ApiResponse createFeedback(UUID productId, String message) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new NotFoundException("Mahsyulot topilmadi."));
-        Feedback feedback = new Feedback();
-        feedback.setMessage(message);
-        feedback.setProduct(product);
-        feedbackRepository.save(feedback);
-        return new ApiResponse("Feedback qo`shildi.l", 201);
+        try {
+
+            Product product = productRepository.findById(productId)
+                    .orElseThrow(() -> new NotFoundException("Mahsyulot topilmadi."));
+            Feedback feedback = new Feedback();
+            feedback.setMessage(message);
+            feedback.setProduct(product);
+            feedbackRepository.save(feedback);
+            return new ApiResponse("Feedback qo`shildi", 201);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ApiResponse("Nimadir xato bo`ldi", 500);
     }
 
     public ApiResponse delete(UUID id) {

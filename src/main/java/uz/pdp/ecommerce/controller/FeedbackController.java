@@ -26,7 +26,8 @@ public class FeedbackController {
 
     @PostMapping
     public ResponseEntity<?> addFeedback(@RequestBody FeedBackReq feedback) {
-//        product_id = feedback.getId()
+        System.out.println(feedback.getId());
+        System.out.println(feedback.getMessage());
         ApiResponse response = feedbackService.createFeedback(feedback.getId(), feedback.getMessage());
         return ResponseEntity.status(response.getStatus()).body(response);
     }
