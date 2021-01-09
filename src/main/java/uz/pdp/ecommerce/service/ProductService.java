@@ -3,6 +3,7 @@ package uz.pdp.ecommerce.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import uz.pdp.ecommerce.entity.Attachment;
 import uz.pdp.ecommerce.entity.Category;
@@ -73,5 +74,11 @@ public class ProductService {
     public ApiResponse delete(UUID id) {
         productRepository.deleteById(id);
         return new ApiResponse("Mahsulot o`chirildi", 200);
+    }
+
+    public Page<Product> getAllProductByCategory(Integer page, String category) {
+        if (category.equalsIgnoreCase("all"))
+            return productRepository.findAll(PageRequest.of(page, 20));
+        return productRepository.findAllByCategoryName(category, PageRequest.of(page, 20));
     }
 }

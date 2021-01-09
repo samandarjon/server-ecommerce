@@ -22,6 +22,10 @@ public class ProductController {
     public ResponseEntity<?> getAllProduct(@RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "user", defaultValue = "") UUID user) {
         return ResponseEntity.ok(productService.getAll(page, user));
     }
+    @GetMapping("/filter")
+    public ResponseEntity<?> getAllProductByCategory(@RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "category", defaultValue = "all") String category) {
+        return ResponseEntity.ok(productService.getAllProductByCategory(page, category));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getOneProduct(@PathVariable UUID id) {

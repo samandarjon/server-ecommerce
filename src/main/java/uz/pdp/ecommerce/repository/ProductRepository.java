@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface ProductRepository extends JpaRepository<Product, UUID> {
     Page<Product> findAllByCreatedBy(UUID createdBy, Pageable pageable);
 
+    Page<Product> findAllByCategoryName(String category_name, Pageable pageable);
+
 }

@@ -12,13 +12,13 @@ import java.util.Map;
 public class Product extends AGenerator {
     private String title;
     private String description;
-    @OneToMany(targetEntity = Attachment.class, cascade = CascadeType.REMOVE)
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Attachment> attachments;
     private double price;
 
     @ManyToOne
     private Category category;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Feedback> feedback;
 
     @ElementCollection

@@ -2,10 +2,10 @@ package uz.pdp.ecommerce.payload;
 
 import java.util.UUID;
 
-public class FeedbackMessage {
+public class FeedbackMessage{
     private UUID id;
     private String message;
-    private String user;
+        private String user;
 
     public FeedbackMessage() {
     }

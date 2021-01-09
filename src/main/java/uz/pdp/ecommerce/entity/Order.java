@@ -25,7 +25,7 @@ public class Order extends AGenerator  {
 
     private boolean consumerSeen;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.REMOVE)
     private Address address;
 
     public Order(Product product, int amount, OrderType orderType, boolean consumerSeen, Address address) {

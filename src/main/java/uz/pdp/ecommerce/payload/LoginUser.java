@@ -1,7 +1,5 @@
 package uz.pdp.ecommerce.payload;
 
-import lombok.Data;
-
 import javax.validation.constraints.NotBlank;
 
 

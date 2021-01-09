@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class AttachmentContent extends AGenerator {
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,  orphanRemoval = true)
     private Attachment attachment;
 
     private byte[] content;
