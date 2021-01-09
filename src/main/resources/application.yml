@@ -1,7 +1,7 @@
 spring:
   datasource:
-    username: postgres
-    password: smndr2013
+    username: <username>
+    password: <password>
     url: jdbc:postgresql://localhost:5432/ecommerce
     initialization-mode: never
   jpa:
